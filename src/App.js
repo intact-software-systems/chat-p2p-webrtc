@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import AppHeader from './AppHeader'
+import ChatInput from './components/ChatInput'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+export default class App extends React.Component {
+
+    onChange(event) {
+        console.log('Event ' + event.target.value)
+    }
+
+    onKeyDown(event) {
+        if (event.keyCode === 13) {
+            console.log('Enter pressed ' + event.key)
+        }
+        console.log('Event ' + event.keyCode)
+    }
+
+
+    render() {
+        return <div style={{flexGrow: 1}}>
+            <AppHeader/>
+            <ChatInput onKeyDown={e => this.onKeyDown(e)} onChange={e => this.onChange(e)}/>
+        </div>
+    }
 }
 
-export default App;
+App.propTypes = {
+    name: PropTypes.string.isRequired
+}
