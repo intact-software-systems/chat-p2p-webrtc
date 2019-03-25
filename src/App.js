@@ -1,30 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import AppHeader from './AppHeader'
-import ChatInput from './components/ChatInput'
+import AppHeader from './components/AppHeader'
+import AppFooter from './components/AppFooter'
+import {BrowserRouter} from 'react-router-dom'
+import AppPages from './AppPages'
+
+const mockData = require('./mock/app-data-mock.json')
 
 export default class App extends React.Component {
-
-    onChange(event) {
-        console.log('Event ' + event.target.value)
+    onClicked(key, event) {
+        console.log(key + ' ' + event.target.value)
     }
-
-    onKeyDown(event) {
-        if (event.keyCode === 13) {
-            console.log('Enter pressed ' + event.key)
-        }
-        console.log('Event ' + event.keyCode)
-    }
-
 
     render() {
-        return <div style={{flexGrow: 1}}>
-            <AppHeader/>
-            <ChatInput onKeyDown={e => this.onKeyDown(e)} onChange={e => this.onChange(e)}/>
-        </div>
+        return <BrowserRouter basename={this.props.clientBaseUrl}>
+            <AppHeader onClicked={(key, event) => this.onClicked(key, event)} text={mockData.menu}/>
+            <AppPages clientBaseUrl={this.props.clientBaseUrl} chatRoom={mockData.chatRoom}/>
+            <AppFooter/>
+        </BrowserRouter>
     }
 }
 
 App.propTypes = {
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    clientBaseUrl: PropTypes.string.isRequired
 }

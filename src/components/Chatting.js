@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import DataChannel from './DataChannel'
+import DataChannel from '../DataChannel'
 
 export default class Chatting extends React.Component {
     constructor(props) {

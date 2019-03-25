@@ -1,0 +1,22 @@
+{
+  "menu": {
+    "home": "ChatApp",
+    "pricing": "Pricing",
+    "features": "Features",
+    "chat": "Chat",
+    "login": "Login"
+  },
+  "chatRoom": {
+    "id": "chat-about-stuff",
+    "participants": [
+      {
+        "id": "12345432",
+        "nickName": "the-dude"
+      },
+      {
+        "id": "12345442332",
+        "nickName": "the-dudd"
+      }
+    ]
+  }
+}

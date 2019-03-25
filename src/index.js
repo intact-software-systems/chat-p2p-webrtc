@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from "./App"
+import App from './App'
 
-import './styling/bootstrap.min.css'
-import '../assets/react-toolbox/theme.css'
+import './public/stylesheets/bootstrap.min.css'
+import AppConstants from './util/AppConstants'
 
-ReactDOM.render(<App name={"chat"}/>, document.getElementById('root'))
+ReactDOM.render(<App name={'chat'} clientBaseUrl={AppConstants.clientBaseUrl()}/>, document.getElementById(AppConstants.reactComponentId()))
