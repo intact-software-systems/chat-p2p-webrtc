@@ -1,10 +1,56 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ChatRoom from '../components/ChatRoom'
+import DataChannel from '../webrtc/DataChannel'
+import Spinner from 'react-bootstrap/Spinner'
+
+const uuidv4 = require('uuid/v4')
 
 export default class ChatSpace extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            dataChannel: DataChannel.withName(this.props.chatRoomId),
+            messages: []
+        }
+    }
+
+    onMessage(message) {
+        if(message.length > 0) {
+            this.setState({messages: [...this.state.messages, message]})
+            this.state.dataChannel.sendMessage(message)
+        }
+    }
+
+    componentDidMount() {
+        this.state.dataChannel.callbacks().onMessage(event => this.onLocalMessageReceived(event))
+        this.state.dataChannel.connect()
+        this.state.dataChannel.callbacks().onOpenDo(() => {
+            this.setState({ messages: []})
+        })
+    }
+
+    onLocalMessageReceived(event) {
+        console.log(`Remote message received by local: ${event.data}`)
+
+        this.setState({
+            message: [...this.state.message, event.data]
+        })
+
+        console.log(this.state.message)
+    }
+
     render() {
-        return <ChatRoom chatRoomId={this.props.chatRoomId}/>
+        if(!this.state.dataChannel.isConnected()) {
+            return <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        }
+
+        return <div key={uuidv4()}>
+            <ChatRoom chatRoomId={this.props.chatRoomId} onMessage={message => this.onMessage(message)} chats={this.state.messages}/>
+        </div>
     }
 }
 

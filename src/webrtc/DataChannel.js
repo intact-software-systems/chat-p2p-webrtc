@@ -51,17 +51,20 @@ export default class DataChannel {
         this.sendChannel.binaryType = 'arraybuffer'
 
         this.sendChannel.addEventListener('open', event => {
+            console.log('Send channel opened!')
             this.connected = true
             this.subject.onOpen()
         })
 
         this.sendChannel.addEventListener('close', event => {
+            console.log('Send channel closed!')
+
             this.connected = false
             this.subject.onClose()
         })
 
         this.sendChannel.addEventListener('message', event => {
-            console.log('Received ' + event.data)
+            console.log('Send channel received ' + event.data)
             this.subject.onMessage(event)
         })
 
@@ -73,11 +76,17 @@ export default class DataChannel {
 
             this.receiveChannel = event.channel
             this.receiveChannel.binaryType = 'arraybuffer'
-            this.receiveChannel.addEventListener('message', event => console.log('Received data' + event.data))
+            this.receiveChannel.addEventListener('message', event => console.log('Received: ' + event.data))
             this.receiveChannel.addEventListener('close', () => {
                 console.log('Remote channel closed!')
                 this.connected = false
             })
+
+            this.receiveChannel.addEventListener('open', () => {
+                console.log('Remote channel opened!')
+                // this.connected = false
+            })
+
         })
 
 
