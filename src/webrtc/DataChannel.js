@@ -1,36 +1,4 @@
-class Callbacks {
-    onopen = []
-    onclose = []
-    onmessage = []
-    ondatachannel = []
-
-    onOpenDo(onopen) {
-        this.onopen.push(onopen)
-        return this
-    }
-
-    onCloseDo(onclose) {
-        this.onclose.push(onclose)
-        return this
-    }
-
-    onMessageDo(onmessage) {
-        this.onmessage.push(onmessage)
-        return this
-    }
-
-    onOpen() {
-        this.onopen.forEach(callback => callback())
-    }
-
-    onClose() {
-        this.onclose.forEach(callback => callback())
-    }
-
-    onMessage(event) {
-        this.onmessage.forEach(callback => callback(event))
-    }
-}
+import Callbacks from './Callbacks'
 
 export default class DataChannel {
     name
@@ -38,13 +6,13 @@ export default class DataChannel {
     localConnection
     remoteConnection
     sendChannel
+    subject
     receiveChannel
 
     constructor(name) {
         this.name = name
         this.connected = false
         this.subject = new Callbacks()
-
 
         this.localConnection = new RTCPeerConnection()
         this.sendChannel = this.localConnection.createDataChannel(this.name)
@@ -53,14 +21,14 @@ export default class DataChannel {
         this.sendChannel.addEventListener('open', event => {
             console.log('Send channel opened!')
             this.connected = true
-            this.subject.onOpen()
+            this.subject.onOpen(event)
         })
 
         this.sendChannel.addEventListener('close', event => {
             console.log('Send channel closed!')
 
             this.connected = false
-            this.subject.onClose()
+            this.subject.onClose(event)
         })
 
         this.sendChannel.addEventListener('message', event => {

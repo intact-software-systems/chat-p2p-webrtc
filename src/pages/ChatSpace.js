@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ChatRoom from '../components/ChatRoom'
-import DataChannel from '../webrtc/DataChannel'
 import Spinner from 'react-bootstrap/Spinner'
+import DataChannelOneWay from '../webrtc/DataChannelOneWay'
 
 const uuidv4 = require('uuid/v4')
 
@@ -11,24 +11,25 @@ export default class ChatSpace extends React.Component {
         super(props)
 
         this.state = {
-            dataChannel: DataChannel.withName(this.props.chatRoomId),
+            dataChannel: DataChannelOneWay.withName(this.props.chatRoomId),
             messages: []
         }
     }
 
     onMessage(message) {
-        if(message.length > 0) {
+        if (message.length > 0) {
             this.setState({messages: [...this.state.messages, message]})
             this.state.dataChannel.sendMessage(message)
         }
     }
 
     componentDidMount() {
-        this.state.dataChannel.callbacks().onMessage(event => this.onLocalMessageReceived(event))
-        this.state.dataChannel.connect()
-        this.state.dataChannel.callbacks().onOpenDo(() => {
-            this.setState({ messages: []})
-        })
+        this.state.dataChannel.createOffer()
+        this.state.dataChannel.callbacks()
+            .onMessageDo(event => this.onLocalMessageReceived(event))
+            .onOpenDo(() => {
+                this.setState({messages: []})
+            })
     }
 
     onLocalMessageReceived(event) {
@@ -42,7 +43,7 @@ export default class ChatSpace extends React.Component {
     }
 
     render() {
-        if(!this.state.dataChannel.isConnected()) {
+        if (!this.state.dataChannel.isConnected()) {
             return <Spinner animation="border" role="status">
                 <span className="sr-only">Loading...</span>
             </Spinner>
