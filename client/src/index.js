@@ -4,5 +4,6 @@ import App from './App'
 
 import './public/stylesheets/bootstrap.min.css'
 import AppConstants from './util/AppConstants'
+import {AppType} from './AppType'
 
-ReactDOM.render(<App name={'chat'} clientBaseUrl={AppConstants.clientBaseUrl()}/>, document.getElementById(AppConstants.reactComponentId()))
+ReactDOM.render(<App name={'chat'} clientBaseUrl={AppConstants.clientBaseUrl()} appType={AppType.SOCKETIO}/>, document.getElementById(AppConstants.reactComponentId()))

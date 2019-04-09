@@ -1,12 +1,23 @@
 {
   "name": "chat-server",
-  "version": "1",
+  "version": "",
   "private": true,
+  "description": "chat server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intact-software-systems/chat-p2p-webrtc.git"
+  },
   "scripts": {
-    "start": "node ./www",
-    "debug": "node --inspect ./www"
+    "start": "node ../www.js",
+    "debug": "node --inspect ../www.js"
   },
   "dependencies": {
-    "express": "4.16.4"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
+    "hbs": "^4.0.3",
+    "helmet": "^3.16.0",
+    "log-timestamp": "^0.3.0",
+    "serve-favicon": "^2.5.0"
   }
 }
