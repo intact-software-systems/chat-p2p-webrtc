@@ -8,8 +8,8 @@
     "url": "https://github.com/intact-software-systems/chat-p2p-webrtc.git"
   },
   "scripts": {
-    "start": "node ../www.js",
-    "debug": "node --inspect ../www.js"
+    "start": "node App.js",
+    "debug": "node --inspect App.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -18,6 +18,10 @@
     "hbs": "^4.0.3",
     "helmet": "^3.16.0",
     "log-timestamp": "^0.3.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "debug": "^4.1.1"
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {Redirect, Route, Switch} from 'react-router-dom'
 import ChatSpace from './pages/ChatSpace'
 import io from 'socket.io-client'
-import {AppTopics} from './util/AppTopics'
+const AppTopics = require('../../library/AppTopics')
 
 export default class AppPagesSocketIO extends React.Component {
     constructor(props) {

@@ -1,11 +1,16 @@
 require('log-timestamp')
 
-const ExpressApp = require("./ExpressApp")
-const app = ExpressApp.initialize()
-module.exports = app
+const app = require('./ExpressApp').initialize()
+const server = require('./ExpressServer').initializeServer(app)
+const io = require('./ExpressSocketIO').initializeSocketIO(server)
 
-app.get('/', function(req, res){
-    res.send('<h1>Hello world</h1>');
-});
+app.use((req, res, next) => {
+    req.io = io
+    next()
+})
 
-app.use('/api', )
+const port = process.env.PORT || '4000'
+
+app.set('port', port)
+server.listen(port)
+

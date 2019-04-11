@@ -1,4 +1,4 @@
-export const AppTopics = {
+module.exports = AppTopics = {
     ROOM: {
         name: 'ROOM',
         events: {

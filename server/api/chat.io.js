@@ -19,3 +19,18 @@ var news = io
     });
 
  */
+
+// const express = require('express')
+// const router = express.Router()
+// module.exports = router
+
+
+module.exports = {
+    initialize: app => {
+        const server = require('http').Server(app)
+        const io = require('socket.io')(server)
+
+
+
+    }
+}
