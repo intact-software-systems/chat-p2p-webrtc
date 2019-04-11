@@ -4,10 +4,10 @@ import AppHeader from './components/AppHeader'
 import AppFooter from './components/AppFooter'
 import {BrowserRouter} from 'react-router-dom'
 import AppPages from './AppPages'
-import AppType from '../../library/AppType'
 import AppPagesSocketIO from './AppPagesSocketIO'
 import AppPagesGraphQL from './AppPagesGraphQL'
 
+const AppType = require('./library/AppType').AppType
 const mockData = require('./mock/app-data-mock.json')
 
 export default class App extends React.Component {
@@ -18,9 +18,9 @@ export default class App extends React.Component {
     renderAppPages() {
         switch(this.props.appType) {
             case AppType.GRAPHQL:
-                return <AppPagesSocketIO clientBaseUrl={this.props.clientBaseUrl} chatRoom={mockData.chatRoom}/>
-            case AppType.SOCKETIO:
                 return <AppPagesGraphQL clientBaseUrl={this.props.clientBaseUrl} chatRoom={mockData.chatRoom}/>
+            case AppType.SOCKETIO:
+                return <AppPagesSocketIO clientBaseUrl={this.props.clientBaseUrl} chatRoom={mockData.chatRoom}/>
             default:
                 return <AppPages clientBaseUrl={this.props.clientBaseUrl} chatRoom={mockData.chatRoom}/>
         }

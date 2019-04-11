@@ -2,6 +2,7 @@
   "name": "chat-p2p-webrtc",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "optional-js": "^2.0.0",
     "prop-types": "^15.7.2",

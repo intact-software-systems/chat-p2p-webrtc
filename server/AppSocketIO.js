@@ -1,4 +1,4 @@
-const AppTopics = require('../library/AppTopics')
+const AppTopics = require('../client/src/library/AppTopics').AppTopics
 
 module.exports = {
     appSocketIO: io => {

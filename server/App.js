@@ -1,8 +1,12 @@
 require('log-timestamp')
-const AppType = require('../library/AppType')
+
+const AppType = require('../client/src/library/AppType').AppType
+const port = process.env.PORT || '4000'
 
 const app = require('./express/ExpressApp').initialize()
-const server = require('./express/ExpressServer').initializeServer(app)
+app.set('port', port)
+
+const server = require('./express/ExpressServer').initializeServer(app, port)
 const io = require('socket.io')(server)
 
 app.use((req, res, next) => {
@@ -13,6 +17,8 @@ app.use((req, res, next) => {
 initApp(process.env.appType || AppType.SOCKETIO)
 
 function initApp(appType) {
+    console.log("Starting as " + appType)
+
     switch (appType) {
         case AppType.GRAPHQL:
             console.log(AppType.GRAPHQL + ' not supported. Defaulting to ' + AppType.SOCKETIO)
@@ -22,8 +28,5 @@ function initApp(appType) {
     }
 }
 
-const port = process.env.PORT || '4000'
-
-app.set('port', port)
 server.listen(port)
 

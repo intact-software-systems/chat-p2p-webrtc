@@ -1,5 +1,5 @@
 module.exports = {
-    initializeServer: app => {
+    initializeServer: (app, port) => {
         const server = require('http').createServer(app)
 
         server.on('error', error => {
@@ -7,7 +7,7 @@ module.exports = {
                 throw error
             }
 
-            var bind = typeof port === 'string'
+            const bind = typeof port === 'string'
                 ? 'Pipe ' + port
                 : 'Port ' + port
 
@@ -27,10 +27,10 @@ module.exports = {
         })
 
         server.on('listening', () => {
-            var env = process.env.NODE_ENV
+            const env = process.env.NODE_ENV
             console.info(env === undefined ? 'Application started in DEVELOPMENT mode' : 'Application started in ' + env.toUpperCase() + ' mode')
-            var addr = server.address()
-            var bind = typeof addr === 'string'
+            const addr = server.address()
+            const bind = typeof addr === 'string'
                 ? 'pipe ' + addr
                 : 'port ' + addr.port
             console.debug('Listening on ' + bind)

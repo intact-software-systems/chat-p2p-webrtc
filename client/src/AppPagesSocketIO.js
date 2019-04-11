@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import {Redirect, Route, Switch} from 'react-router-dom'
 import ChatSpace from './pages/ChatSpace'
 import io from 'socket.io-client'
-const AppTopics = require('../../library/AppTopics')
+
+const AppTopics = require('./library/AppTopics').AppTopics
 
 export default class AppPagesSocketIO extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export default class AppPagesSocketIO extends React.Component {
         this.state = {
             chatRoomId: undefined,
             chatRoom: undefined,
-            socket: io('http://localhost:3000')
+            socket: io()
         }
     }
 
@@ -29,9 +30,13 @@ export default class AppPagesSocketIO extends React.Component {
                 console.log('Chat ' + JSON.stringify(chat))
             }
         )
+
+        this.state.socket.emit(AppTopics.ROOM.name, "Default")
     }
 
     render() {
+        // TODO: Join room page/route
+
         return <Switch>
             <Route exact path={'/'} render={routerProps => <ChatSpace chatRoomId={this.props.chatRoomId}/>}/>
             <Redirect to={'/'}/>
