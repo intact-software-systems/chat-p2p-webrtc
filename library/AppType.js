@@ -1,4 +1,4 @@
-export const AppType = {
+module.exports = AppType = {
     SOCKETIO: 'SOCKETIO',
     GRAPHQL: 'GRAPHQL'
 }

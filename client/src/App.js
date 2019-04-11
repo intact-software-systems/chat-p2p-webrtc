@@ -4,11 +4,9 @@ import AppHeader from './components/AppHeader'
 import AppFooter from './components/AppFooter'
 import {BrowserRouter} from 'react-router-dom'
 import AppPages from './AppPages'
-import {AppType} from './AppType'
+import AppType from '../../library/AppType'
 import AppPagesSocketIO from './AppPagesSocketIO'
 import AppPagesGraphQL from './AppPagesGraphQL'
-
-const TestModuleExports = require('./util/TestModuleExports').TestExport
 
 const mockData = require('./mock/app-data-mock.json')
 
@@ -29,8 +27,6 @@ export default class App extends React.Component {
     }
 
     render() {
-        console.log("prop " + TestModuleExports('a'))
-
         const appPages = this.renderAppPages()
 
         return <BrowserRouter basename={this.props.clientBaseUrl}>

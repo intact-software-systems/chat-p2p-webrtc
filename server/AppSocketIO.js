@@ -1,8 +1,7 @@
-module.exports = {
-    initializeSocketIO: server => {
-        const io = require('socket.io')(server)
-        const AppTopics = require('../library/AppTopics')
+const AppTopics = require('../library/AppTopics')
 
+module.exports = {
+    appSocketIO: io => {
         io.on('connection', socket => {
                 console.log('a user connected')
 
