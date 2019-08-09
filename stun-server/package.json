@@ -1,0 +1,10 @@
+{
+  "name": "stun-server",
+  "version": "1.0.0",
+  "dependencies": {
+    "stun": "^2.0.0"
+  },
+  "scripts": {
+    "start": "node stun-server.js"
+  }
+}

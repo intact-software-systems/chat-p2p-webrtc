@@ -85,23 +85,23 @@ export default class DataChannelOneWay {
     }
 
     createOffer() {
-        this.localConnection.createOffer()
+        return this.localConnection.createOffer()
             .then(offer => {
                 console.log('Got local offer ' + JSON.stringify(offer))
                 return this.localConnection.setLocalDescription(offer)
+                    .then(() => offer)
+                    .catch(err => err)
             })
-            // .then(() => this.remoteConnection.setRemoteDescription(this.localConnection.localDescription))
-            // .then(() => this.remoteConnection.createAnswer())
-            // .then(answer => {
-            //     console.log(`Got remote answer ${JSON.stringify(answer)}`)
-            //     return this.remoteConnection.setLocalDescription(answer)
-            // })
-            // .then(() => this.localConnection.setRemoteDescription(this.remoteConnection.localDescription))
             .catch(e => {
                 console.error('Create offer failure', e)
             })
-
-        return this
     }
 
+    // .then(() => this.remoteConnection.setRemoteDescription(this.localConnection.localDescription))
+    // .then(() => this.remoteConnection.createAnswer())
+    // .then(answer => {
+    //     console.log(`Got remote answer ${JSON.stringify(answer)}`)
+    //     return this.remoteConnection.setLocalDescription(answer)
+    // })
+    // .then(() => this.localConnection.setRemoteDescription(this.remoteConnection.localDescription))
 }

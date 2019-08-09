@@ -4,17 +4,18 @@
   "private": true,
   "proxy": "http://localhost:4000",
   "dependencies": {
-    "optional-js": "^2.0.0",
+    "optional-js": "^2.1.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-bootstrap": "^1.0.0-beta.6",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.0",
+    "react": "^16.9.0",
+    "react-bootstrap": "^1.0.0-beta.10",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "^2.1.8",
-    "react-test-renderer": "^16.8.6",
+    "react-test-renderer": "^16.9.0",
+    "socket.io-client": "^2.2.0",
+    "stun": "^2.0.0",
     "uuid": "^3.3.2",
-    "webrtc-adapter": "^7.2.1",
-    "socket.io-client": "^2.2.0"
+    "webrtc-adapter": "^7.2.9"
   },
   "scripts": {
     "start": "react-scripts start",

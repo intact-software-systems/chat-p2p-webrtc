@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {Redirect, Route, Switch} from 'react-router-dom'
 import ChatSpace from './pages/ChatSpace'
 import io from 'socket.io-client'
+import SetupDataChannel from './pages/SetupDataChannel'
 
 const AppTopics = require('./library/AppTopics').AppTopics
 
@@ -31,7 +32,21 @@ export default class AppPagesSocketIO extends React.Component {
             }
         )
 
-        this.state.socket.emit(AppTopics.ROOM.name, "Default")
+        this.state.socket.on(
+            'offer',
+            offer => {
+                console.log('Offer ' + JSON.stringify(offer))
+            }
+        )
+
+        this.state.socket.on(
+            'answer',
+            answer => {
+                console.log('Offer ' + JSON.stringify(answer))
+            }
+        )
+
+        this.state.socket.emit(AppTopics.ROOM.name, 'Default')
     }
 
     render() {
@@ -39,7 +54,16 @@ export default class AppPagesSocketIO extends React.Component {
 
         return <Switch>
             <Route exact path={'/'} render={routerProps => <ChatSpace chatRoomId={this.props.chatRoomId}/>}/>
-            <Redirect to={'/'}/>
+
+            <Route exact path={'/setup'} render={routerProps => {
+
+                return <SetupDataChannel onOffer={offer => this.state.socket.emit('offer', offer)}
+
+                />
+
+            }}/>
+
+            <Redirect to={'/setup'}/>
         </Switch>
     }
 }

@@ -40,5 +40,26 @@ Use these parts and create a Meteor application to enable installation on phones
 
 
 
+## Test
 
+stun.request('stun.l.google.com:19302', (err, res) => {
+  if (err) {
+    console.error(err);
+  } else {
+    const { address } = res.getXorAddress();
+    console.log('your ip', address);
+  }
+});
+
+
+## URL WEB RTC tutorials
+
+https://www.html5rocks.com/en/tutorials/webrtc/basics/
+
+
+## JsSIP
+
+https://github.com/versatica/JsSIP
+
+https://www.npmjs.com/package/react-sip
 
