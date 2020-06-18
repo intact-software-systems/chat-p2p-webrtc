@@ -1,6 +1,6 @@
 require('log-timestamp')
 
-const AppType = require('../client/src/library/AppType').AppType
+const AppType = require('../client-tests/src/library/AppType').AppType
 const port = process.env.PORT || '4000'
 
 const app = require('./express/ExpressApp').initialize()

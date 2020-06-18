@@ -7,4 +7,7 @@ import AppConstants from './util/AppConstants'
 
 const AppType = require('./library/AppType').AppType
 
-ReactDOM.render(<App name={'chat'} clientBaseUrl={AppConstants.clientBaseUrl()} appType={AppType.SOCKETIO}/>, document.getElementById(AppConstants.reactComponentId()))
+ReactDOM.render(
+    <App name={'chat'} clientBaseUrl={AppConstants.clientBaseUrl()} appType={AppType.SOCKETIO}/>,
+    document.getElementById(AppConstants.reactComponentId())
+)

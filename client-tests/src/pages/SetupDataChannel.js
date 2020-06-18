@@ -7,6 +7,17 @@ import StunRequest from '../webrtc/StunRequest'
 
 /**
 
+ WEBRTC needs server functionality:
+
+ User discovery and communication.
+ Signaling.
+ NAT/firewall traversal.
+ Relay servers in case peer-to-peer communication fails.
+
+
+
+
+
  https://www.html5rocks.com/en/tutorials/webrtc/basics/
 
  https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/
@@ -16,7 +27,7 @@ import StunRequest from '../webrtc/StunRequest'
 
  Alice creates an RTCPeerConnection object.
  Alice creates an offer (an SDP session description) with the RTCPeerConnection createOffer() method.
- Alice calls setLocalDescription() with his offer.
+ Alice calls setLocalDescription() with her offer.
  Alice stringifies the offer and uses a signaling mechanism to send it to Eve.
 
  Eve calls setRemoteDescription() with Alice's offer, so that her RTCPeerConnection knows about Alice's setup.

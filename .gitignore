@@ -85,4 +85,4 @@ yarn-error.log*
 
 .idea
 
-client/build
+client-tests/build
