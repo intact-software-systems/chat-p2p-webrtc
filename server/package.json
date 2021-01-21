@@ -19,7 +19,7 @@
     "helmet": "^3.20.0",
     "log-timestamp": "^0.3.0",
     "serve-favicon": "^2.5.0",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "stun": "^2.0.0"
   },
   "devDependencies": {
